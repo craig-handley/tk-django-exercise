@@ -92,7 +92,7 @@ class RecipeApiTests(TestCase):
 
         with no results
         """
-        recipe = sample_recipe(
+        sample_recipe(
             name='Beans on toast',
             description='Baked beans on white toast',
         )
@@ -146,10 +146,13 @@ class RecipeApiTests(TestCase):
         payload = {
             'name': 'Pizza',
             'description': 'Put it in the oven',
-            'ingredients': [{'name': 'dough'}, {'name': 'cheese'}, {'name': 'tomato'}]
+            'ingredients': [
+                {'name': 'dough'},
+                {'name': 'cheese'},
+                {'name': 'tomato'}]
         }
 
-        res = self.client.post(RECIPES_URL, payload)
+        res = self.client.post(RECIPES_URL, payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
@@ -197,7 +200,8 @@ class RecipeApiTests(TestCase):
             ]
         }
 
-        res = self.client.patch(recipe_url(recipe_id=recipe.id), payload)
+        res = self.client.patch(recipe_url(
+            recipe_id=recipe.id), payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
