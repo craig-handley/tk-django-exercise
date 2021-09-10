@@ -6,7 +6,6 @@ class IngredientSerializer(serializers.ModelSerializer):
     """
     Serializer for Ingredient objects
     """
-    print('IngredientSerializer')
 
     class Meta:
         model = Ingredient
